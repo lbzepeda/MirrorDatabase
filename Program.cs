@@ -31,7 +31,7 @@ namespace MirrorDataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(@"server=containers-us-west-64.railway.app;port=6729;database=railway;user=root;password=9ws9eQ36O8usgsi5s8rL", new MySqlServerVersion(new Version(8, 0, 21)));
+            optionsBuilder.UseMySql(@"server=34.173.53.131;port=3306;database=alaskacool;user=root;password=Carl1991*+1", new MySqlServerVersion(new Version(8, 0, 21)));
         }
     }
 
