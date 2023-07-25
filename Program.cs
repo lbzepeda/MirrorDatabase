@@ -124,7 +124,7 @@ namespace MirrorDataBase
                     },
                     channelId: "C05HGSR2Z7C",
                     icon_emoji: ":robot_face:",
-                    text: $"Se creo una nueva cotización a nombre de *{cliente.Nombrede}* por el vendedor *{cliente.RegistroUsuario}*. Cotización No. *{cliente.NoFactura}*");
+                    text: $"Se creo una nueva cotización a nombre de *{cliente.Nombrede}*, codCliente: *{cliente.CodCli}* por el vendedor *{cliente.RegistroUsuario}*. Cotización No. *{cliente.NoFactura}*");
 
                     Console.WriteLine($"Insertado en MySQL Proformas-> ID: {cliente.NoFactura}");
                 }
