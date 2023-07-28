@@ -2,8 +2,7 @@ name: .run-project
 
 on:
   schedule:
-    - cron: '0,30 8-16 * * *'
-    - cron: '0 17 * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   build:
