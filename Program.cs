@@ -15,9 +15,20 @@ namespace MirrorDataBase
         public DbSet<Proforma> Proformas { get; set; }
         public DbSet<Producto> Productos { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DetFactura>()
+                .HasKey(c => new { c.Sucursal, c.NoFactura, c.Serie, c.Producto, c.Bod_Descargue, c.Numero, c.cod_combo, c.indice, c.TipoServicio });
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=20.120.95.95\ALASKACOOL;Initial Catalog=2201ALASKACOOL_CENTRAL;User ID=LZepeda;Password=Zepeda2023;Connect Timeout=60;TrustServerCertificate=True;");
+            //SQL
+            string sqlServer = Environment.GetEnvironmentVariable("SQL_SERVER") ?? "";
+            string sqlDatabase = Environment.GetEnvironmentVariable("SQL_DATABASE") ?? "";
+            string sqlUser = Environment.GetEnvironmentVariable("SQL_USER") ?? "";
+            string sqlPassword = Environment.GetEnvironmentVariable("SQL_PASSWORD") ?? "";
+            optionsBuilder.UseSqlServer($@"Data Source={sqlServer};Initial Catalog={sqlDatabase};User ID={sqlUser};Password={sqlPassword};Connect Timeout=60;TrustServerCertificate=True;");
         }
     }
 
@@ -29,9 +40,23 @@ namespace MirrorDataBase
         public DbSet<Proforma> Proformas { get; set; }
         public DbSet<Producto> Productos { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DetFactura>()
+                .HasKey(c => new { c.Sucursal, c.NoFactura, c.Serie, c.Producto, c.Bod_Descargue, c.Numero, c.cod_combo, c.indice, c.TipoServicio });
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(@"server=34.173.53.131;port=3306;database=alaskacool;user=root;password=Carl1991*+1", new MySqlServerVersion(new Version(8, 0, 21)));
+            //MySQL
+            string mySqlServer = Environment.GetEnvironmentVariable("MYSQL_SERVER") ?? "";
+            string mySqlPort = Environment.GetEnvironmentVariable("MYSQL_PORT") ?? "";
+            string mySqlDatabase = Environment.GetEnvironmentVariable("MYSQL_DATABASE") ?? "";
+            string mySqlUser = Environment.GetEnvironmentVariable("MYSQL_USER") ?? "";
+            string mySqlPassword = Environment.GetEnvironmentVariable("MYSQL_PASSWORD") ?? "";
+
+            optionsBuilder.UseMySql($@"server={mySqlServer};port={mySqlPort};database={mySqlDatabase};user={mySqlUser};password={mySqlPassword}", 
+                            new MySqlServerVersion(new Version(8, 0, 21)));
         }
     }
 
@@ -151,6 +176,28 @@ namespace MirrorDataBase
             }
 
             Console.WriteLine($"FIN");
+
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            var properties = GetType().GetProperties();
+            foreach (var property in properties)
+            {
+                if (property.GetValue(this) != property.GetValue(obj))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+
     }
 }

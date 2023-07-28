@@ -323,11 +323,13 @@ namespace MirrorDataBase.Model
     [Table("DET_FACTURA")]
     public class DetFactura
     {
+        [Key, Column(Order = 1)]
         public string Sucursal { get; set; }
 
-        [Key]
+        [Key, Column(Order = 2)]
         public string NoFactura { get; set; }
 
+        [Key, Column(Order = 3)]
         public string Serie { get; set; }
 
         public string Tipo { get; set; }
@@ -336,6 +338,7 @@ namespace MirrorDataBase.Model
 
         public DateTime FechaFactura { get; set; }
 
+        [Key, Column(Order = 5)]
         public string Producto { get; set; }
 
         public string UMedida { get; set; }
@@ -358,6 +361,7 @@ namespace MirrorDataBase.Model
 
         public decimal? Exonerado { get; set; }
 
+        [Key, Column(Order = 6)]
         public string Bod_Descargue { get; set; }
 
         public string CodPrecio { get; set; }
@@ -374,14 +378,17 @@ namespace MirrorDataBase.Model
 
         public string tipofac { get; set; }
 
+        [Key, Column(Order = 7)]
         public int Numero { get; set; }
 
         public decimal? valor { get; set; }
 
+        [Key, Column(Order = 8)]
         public string cod_combo { get; set; }
 
         public int orden { get; set; }
 
+        [Key, Column(Order = 9)]
         public int indice { get; set; }
 
         public decimal Porcentaje_ComisionLista { get; set; }
@@ -408,6 +415,7 @@ namespace MirrorDataBase.Model
 
         public int PrioridadDescuento { get; set; }
 
+        [Key, Column(Order = 10)]
         public int TipoServicio { get; set; }
 
         public int Cupones { get; set; }
@@ -446,6 +454,7 @@ namespace MirrorDataBase.Model
 
         public string NumeroTrasladoConsignado { get; set; }
     }
+
 
     [Table("PROFORMA")]
     public class Proforma
@@ -582,7 +591,7 @@ namespace MirrorDataBase.Model
         public decimal Impuesto3 { get; set; }
 
         public decimal Impuesto4 { get; set; }
-        
+
         public decimal Impuesto5 { get; set; }
 
         public string LeyendaInformativa { get; set; }
