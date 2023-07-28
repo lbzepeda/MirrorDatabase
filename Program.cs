@@ -64,7 +64,7 @@ namespace MirrorDataBase
     {
         static void Main(string[] args)
         {
-            string token = "xoxb-5578598620934-5598823791906-ysGSfAr4eRms1TQFi97IJ80b";
+            string token = Environment.GetEnvironmentVariable("TOKENSLACK") ?? "";
             SlackClient slackClient = new SlackClient(token);
 
             //Cliente//
