@@ -62,6 +62,15 @@
           }
         }
       },
+      "dotenv.net/3.1.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/dotenv.net.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/dotenv.net.dll": {}
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
         "type": "package",
         "compile": {
@@ -2093,6 +2102,20 @@
         "azureicon.png",
         "lib/netstandard2.0/Azure.Identity.dll",
         "lib/netstandard2.0/Azure.Identity.xml"
+      ]
+    },
+    "dotenv.net/3.1.2": {
+      "sha512": "lFm4hGX9JkNtAF36Uz4C3WT7MC6Ys802k0cPvlln8ydmH67GQjnToH+w645tQm1czAjW/V6tPE088lD77sYFGA==",
+      "type": "package",
+      "path": "dotenv.net/3.1.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dotenv.net.3.1.2.nupkg.sha512",
+        "dotenv.net.nuspec",
+        "lib/netstandard1.6/dotenv.net.dll",
+        "lib/netstandard2.0/dotenv.net.dll",
+        "lib/netstandard2.1/dotenv.net.dll"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
@@ -6643,7 +6666,8 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.9",
       "Pomelo.EntityFrameworkCore.MySql >= 7.0.0",
       "SlackAPI >= 1.1.14",
-      "System.ComponentModel.Annotations >= 5.0.0"
+      "System.ComponentModel.Annotations >= 5.0.0",
+      "dotenv.net >= 3.1.2"
     ]
   },
   "packageFolders": {
@@ -6703,6 +6727,10 @@
           "System.ComponentModel.Annotations": {
             "target": "Package",
             "version": "[5.0.0, )"
+          },
+          "dotenv.net": {
+            "target": "Package",
+            "version": "[3.1.2, )"
           }
         },
         "imports": [

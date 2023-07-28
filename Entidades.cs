@@ -4,6 +4,66 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MirrorDataBase.Model
 {
+
+    [Table("DET_PROFORMA")]
+    public class DetProforma
+    {
+        [Key, Column(Order = 0)]
+        public string Sucursal { get; set; }
+
+        [Key, Column(Order = 1)]
+        public string NoFactura { get; set; }
+
+        public DateTime FechaFactura { get; set; }
+
+        [Key, Column(Order = 3)]
+        public string Producto { get; set; }
+
+        [Key, Column(Order = 4)]
+        public string cod_combo { get; set; }
+
+        [Key, Column(Order = 5)]
+        public int orden1 { get; set; }
+
+        public string Serie { get; set; }
+        public string Tipo { get; set; }
+        public string Modo { get; set; }
+        public string UMedida { get; set; }
+        public decimal Cantidad { get; set; }
+        public decimal Bonificacion { get; set; }
+        public decimal Financiamiento { get; set; }
+        public decimal Precio { get; set; }
+        public decimal? Porcen_Descto { get; set; }
+        public decimal Descuento { get; set; }
+        public decimal Iva { get; set; }
+        public decimal Costo { get; set; }
+        public decimal Exonerado { get; set; }
+        public string Bod_Descargue { get; set; }
+        public string CodPrecio { get; set; }
+        public string Registro_Usuario { get; set; }
+        public string Registro_Maquina { get; set; }
+        public DateTime Registro_Fecha { get; set; }
+        public string nombre_producto { get; set; }
+        public string Tipodesc { get; set; }
+        public int orden_manual { get; set; }
+        public decimal Porcentaje_ComisionLista { get; set; }
+        public string TipoComponente { get; set; }
+        public string Gravado { get; set; }
+        public decimal? CantidadMovimiento { get; set; }
+        public string MedidaCosteo { get; set; }
+        public string MedidaMovimiento { get; set; }
+        public string Medida_Bonificacion { get; set; }
+        public decimal Bonificacion_movimiento { get; set; }
+        public string DescuentoFijo { get; set; }
+        public int PrioridadDescuento { get; set; }
+        public string num_parte { get; set; }
+        public decimal? Impuesto1 { get; set; }
+        public decimal? Impuesto2 { get; set; }
+        public decimal? Impuesto3 { get; set; }
+        public decimal? Impuesto4 { get; set; }
+        public decimal? Impuesto5 { get; set; }
+    }
+
     [Table("CLIENTES")]
     public class Cliente
     {
@@ -454,7 +514,6 @@ namespace MirrorDataBase.Model
 
         public string NumeroTrasladoConsignado { get; set; }
     }
-
 
     [Table("PROFORMA")]
     public class Proforma

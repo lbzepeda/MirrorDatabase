@@ -1,9 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MirrorDataBase.Model;
 using SlackAPI;
+using dotenv.net;
 
 namespace MirrorDataBase
 {
@@ -13,12 +11,16 @@ namespace MirrorDataBase
         public DbSet<Factura> Facturas { get; set; }
         public DbSet<DetFactura> DetFacturas { get; set; }
         public DbSet<Proforma> Proformas { get; set; }
+        public DbSet<DetProforma> DetProformas { get; set; }
         public DbSet<Producto> Productos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DetFactura>()
                 .HasKey(c => new { c.Sucursal, c.NoFactura, c.Serie, c.Producto, c.Bod_Descargue, c.Numero, c.cod_combo, c.indice, c.TipoServicio });
+
+            modelBuilder.Entity<DetProforma>()
+                .HasKey(p => new { p.Sucursal, p.NoFactura, p.Producto, p.cod_combo, p.orden1 });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -38,12 +40,16 @@ namespace MirrorDataBase
         public DbSet<Factura> Facturas { get; set; }
         public DbSet<DetFactura> DetFacturas { get; set; }
         public DbSet<Proforma> Proformas { get; set; }
+        public DbSet<DetProforma> DetProforma { get; set; }
         public DbSet<Producto> Productos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DetFactura>()
                 .HasKey(c => new { c.Sucursal, c.NoFactura, c.Serie, c.Producto, c.Bod_Descargue, c.Numero, c.cod_combo, c.indice, c.TipoServicio });
+
+                modelBuilder.Entity<DetProforma>()
+                .HasKey(p => new { p.Sucursal, p.NoFactura, p.Producto, p.cod_combo, p.orden1 });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -64,6 +70,10 @@ namespace MirrorDataBase
     {
         static void Main(string[] args)
         {
+            if (System.IO.File.Exists(".env"))
+            {
+                DotEnv.Load();
+            }
             string token = Environment.GetEnvironmentVariable("TOKENSLACK") ?? "";
             SlackClient slackClient = new SlackClient(token);
 
@@ -157,6 +167,25 @@ namespace MirrorDataBase
                 dbMySql.SaveChanges();
             }
 
+            //DetProformas//
+            using (var dbSql = new SqlDbContext())
+            using (var dbMySql = new MySqlDbContext())
+            {
+                var noDetProformaMySql = dbMySql.DetProforma.Select(f => f.NoFactura).ToList();
+                var detProformaToAdd = dbSql.DetProformas
+                    .Where(f => !noDetProformaMySql.Contains(f.NoFactura))
+                    .ToList();
+
+                foreach (var detProforma in detProformaToAdd)
+                {
+                    dbMySql.DetProforma.Add(detProforma);
+                    Console.WriteLine($"Insertado en MySQL DetProforma-> ID: {detProforma.NoFactura}");
+                }
+
+                dbMySql.SaveChanges();
+            }
+
+
             //Productos//
             using (var dbSql = new SqlDbContext())
             using (var dbMySql = new MySqlDbContext())
@@ -178,26 +207,6 @@ namespace MirrorDataBase
             Console.WriteLine($"FIN");
 
         }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null || GetType() != obj.GetType())
-            {
-                return false;
-            }
-
-            var properties = GetType().GetProperties();
-            foreach (var property in properties)
-            {
-                if (property.GetValue(this) != property.GetValue(obj))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
 
     }
 }

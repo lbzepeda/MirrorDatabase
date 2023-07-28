@@ -66,3 +66,4 @@
 /Users/levizepeda/Repo/MirrorDatabase/bin/Debug/net7.0/Pomelo.EntityFrameworkCore.MySql.dll
 /Users/levizepeda/Repo/MirrorDatabase/bin/Debug/net7.0/Newtonsoft.Json.dll
 /Users/levizepeda/Repo/MirrorDatabase/bin/Debug/net7.0/SlackAPI.dll
+/Users/levizepeda/Repo/MirrorDatabase/bin/Debug/net7.0/dotenv.net.dll
