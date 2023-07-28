@@ -39,7 +39,7 @@ namespace MirrorDataBase
     {
         static void Main(string[] args)
         {
-            string token = "xoxb-5578598620934-5598823791906-ZKCvlQ1Oh10zzoUJHZ3IQa2N";
+            string token = "xoxb-5578598620934-5598823791906-ysGSfAr4eRms1TQFi97IJ80b";
             SlackClient slackClient = new SlackClient(token);
 
             //Cliente//
